@@ -1,56 +1,100 @@
-# Chess Game
-## Technologies used:
-Python with pygame module
+# Chess Game (pychess)
 
+A simple, local chess game built with Python and Pygame. Play against another human locally or play against a basic AI powered by a Minimax search with alpha–beta pruning.
 
+---
 
+## Features
+- Two-player local mode (hotseat).
+- Play vs AI (Minimax with alpha–beta pruning, depth = 3).
+- Full chess rules support (basic moves, castling, en passant, pawn promotion).
+- Simple GUI using Pygame and piece artwork.
 
-## Project Description:
-This is a Chess game built using python with pygame module for GUI. It has 2 playing mode either you can play against another human player or against AI. The AI was implemented using Minimax algorithm with alpha beta pruning and with the depth search of 3.
+---
 
-Inorder to model a chessboard within a data structure a 2D array was used with the dimensions of 8x8. The chessboard array could store 64 gametiles objects and each gametile object stored a tile number and a chess piece object.
+## Demo (screenshots)
+Main menu, board, move hints, and game-end screens are included in the `project_images` folder and referenced below:
 
-## Files Description:
+1. Main screen
+![Main screen](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%206.16.22%20PM.png)
 
-1. **Board Directory**: 
-      - Board.py: In this file we create a class of chessBoard and initialize and declare a 2D array of gametiles with null pieces and then place all the chess pieces on the board on their respective starting positions. 
-      - move.py: In this file we define some of the special cases in chess for example castling, enpassant rule, check. functions are used to check whether the the player is in check, return moves available in case the player is in check, return moves in case of castling and return moves available in case of enpassant rule.
-      - Tile.py: It creates a Tile class which is placed on chessboard array. It can store a position number on the board and a chess piece object. 
+2. Starting position
+![Starting position](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%2010.02.30%20PM.png)
 
-2. **chess Art directory**: Contains all the images of the chess pieces.
+3. Move hints (example)
+![Move hints](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%2010.04.24%20PM.png)
 
-3. **pieces directory**: Contains files in which every chess piece class is defined. Every chess piece class has alliance (indicating whether the piece is white or black) and position ( coordinates on the chessboard ) attributes. It also has legalmove method which is used to calculate the legal moves for that chess piece on the chessboard. 
+4. Game end
+![Game end](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%2010.08.36%20PM.png)
 
-4. **Player directory**:
-      - AI.py: Contains the logic for AI algorithm. The AI was implemented using recursive Minimax algorithm with alpha beta pruning and with the depth search of 3. The evaluation function assigned each chess piece a value, White pieces were assigned a positive value based on their rank and black pieces were assigned negative value based on their rank as well. So the total value becomes 0 in the start of the game where each side has all the pieces. The algorithm tried to search all possible moves up to the depth of 3 and calculate which next move could allow it to have best evaluation value.
+---
 
-5.  **Playchess.py**: Main file of the program which merges all the functionality from the other files and itself as well to implement all this on pygame GUI.
-      
-5. **Screen**:
-Game Screen
+## Project Structure
+- `playchess.py` — application entry point and main Pygame loop.
+- `board/` — board representation and helper logic (`chessboard.py`, `move.py`, `tile.py`).
+- `pieces/` — piece classes (`pawn.py`, `rook.py`, `knight.py`, `bishop.py`, `queen.py`, `king.py`, `nullpiece.py`, `piece.py`).
+- `player/` — AI logic (`AI.py`).
+- `chessart/` — piece images used by the GUI.
 
-    1. Main Screen: 
-    ![index page](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%206.16.22%20PM.png)<br/><br/>
-    2. Starting position:
-    ![index page](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%2010.02.30%20PM.png)<br/><br/>
-    4. The GUI guiding player which moves he can play after he clicked on his left white knight:
-    ![index page](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%2010.04.24%20PM.png)<br/><br/>
-    5. Game End screen:
-    ![index page](https://raw.githubusercontent.com/ahmadrazakhawaja/chess-game-AI-project/master/project_images/Screenshot%202021-03-04%20at%2010.08.36%20PM.png)<br/><br/>
+---
 
-## Improvements
-The AI for the game could certainly be improved. An average chess player can easily beat the AI because the AI sometimes make a blunder move , the reason could be because of the evaluation function and the shallow depth of the possibilities explored by the algorithm. The evaluation function could be improved to also take into consideration the position of the chess pieces on the board along with value of the chess pieces. We can train a deep learning model and deploy it into the game if we have enough data.
+## Installation
+1. Clone the repository:
 
-## How to Run the Application
-`git clone https://github.com/ahmadrazakhawaja/chess-game-AI-project.git`
+```
+git clone https://github.com/ahmadrazakhawaja/chess-game-AI-project.git
+cd chess-game-AI-project
+```
 
-`cd chess-game-AI-project`
+2. Install dependencies (recommend using a virtual environment):
 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
-In order to run the game. write the command on terminal or cmd.
+If your environment uses `python3` as the interpreter command, replace `python` with `python3` when running the game.
 
-`python3 playchess.py`
+---
+
+## Usage
+Run the game from the project root:
+
+```
+python playchess.py
+```
+
+Controls:
+- Use the mouse to select pieces and make moves.
+- From the main menu choose `AI` to play vs computer or `2 player` for local multiplayer.
+
+---
+
+## Notes about the AI
+- The AI uses a depth-limited Minimax search (depth = 3) with alpha–beta pruning.
+- The evaluation function values material and includes simple positional heuristics. It is intentionally lightweight for educational/demo purposes.
+- Improvements: deeper search, move ordering, transposition table, and a stronger evaluation function would make the AI significantly stronger.
+
+---
+
+## Contributing
+Contributions are welcome. If you want to improve the AI, GUI, or add features, please:
+
+1. Fork the repository.
+2. Create a new branch for your feature.
+3. Open a pull request with a clear description of changes.
+
+---
+
+## Author
+Maryam
+
+---
+
+If you'd like, I can:
+- Update the image links to point to a different GitHub repository (for example your `maryam-tech-AI/Chess-Game`).
+- Add a `requirements.txt` snippet or a small troubleshooting section.
+
+See the main entry file: [playchess.py](playchess.py#L1).
 
 
 
